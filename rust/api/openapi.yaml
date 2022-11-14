@@ -1,0 +1,860 @@
+openapi: 3.0.0
+info:
+  description: An example API with more than one resource
+  title: Example person and addressbook API
+  version: "1.0"
+servers:
+- url: /
+paths:
+  /addressbook:
+    delete:
+      description: delete operation for /addressbook
+      operationId: addressbook_delete
+      parameters:
+      - description: Limit the number of responses back
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The offset to start returning resources
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressbook'
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: List all addresses in this addressbook
+      operationId: addressbook_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Limit the number of responses back
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The offset to start returning resources
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/addressbook'
+                type: array
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: Determine the existence and size of addresses in this addressbook
+      operationId: addressbook_head
+      parameters:
+      - description: Limit the number of responses back
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The offset to start returning resources
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    patch:
+      description: Patch one or more addresses in this addressbook
+      operationId: addressbook_patch
+      parameters:
+      - description: Limit the number of responses back
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The offset to start returning resources
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressbook'
+          description: OK
+      tags:
+      - addressbook
+    post:
+      description: "Create a new address in this addressbook, a new address key will\
+        \ be created"
+      operationId: addressbook_post
+      parameters:
+      - description: Limit the number of responses back
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The offset to start returning resources
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addressbook_post_request'
+        description: The request body for /addressbook
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressbook'
+          description: CREATED
+      tags:
+      - addressbook
+  /addressbook/{address_key}:
+    delete:
+      description: "delete operation for /addressbook/{address_key}"
+      operationId: addressbook_address_key_delete
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressbook'
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: "get operation for /addressbook/{address_key}"
+      operationId: addressbook_address_key_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressbook'
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: "head operation for /addressbook/{address_key}"
+      operationId: addressbook_address_key_head
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    patch:
+      description: "patch operation for /addressbook/{address_key}"
+      operationId: addressbook_address_key_patch
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressbook'
+          description: OK
+      tags:
+      - addressbook
+    put:
+      description: "put operation for /addressbook/{address_key}"
+      operationId: addressbook_address_key_put
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressbook'
+          description: OK
+      tags:
+      - addressbook
+  /addressbook/{address_key}/addrtype:
+    delete:
+      description: "delete operation for /addressbook/{address_key}/addrtype"
+      operationId: addressbook_address_key_addrtype_delete
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: "The address type, e.g. work or home"
+                enum:
+                - work
+                - home
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: "get operation for /addressbook/{address_key}/addrtype"
+      operationId: addressbook_address_key_addrtype_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: "The address type, e.g. work or home"
+                enum:
+                - work
+                - home
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: "head operation for /addressbook/{address_key}/addrtype"
+      operationId: addressbook_address_key_addrtype_head
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    put:
+      description: "put operation for /addressbook/{address_key}/addrtype"
+      operationId: addressbook_address_key_addrtype_put
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: "The address type, e.g. work or home"
+                enum:
+                - work
+                - home
+                type: string
+          description: OK
+      tags:
+      - addressbook
+  /addressbook/{address_key}/city:
+    delete:
+      description: "delete operation for /addressbook/{address_key}/city"
+      operationId: addressbook_address_key_city_delete
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The city of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: "get operation for /addressbook/{address_key}/city"
+      operationId: addressbook_address_key_city_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The city of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: "head operation for /addressbook/{address_key}/city"
+      operationId: addressbook_address_key_city_head
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    put:
+      description: "put operation for /addressbook/{address_key}/city"
+      operationId: addressbook_address_key_city_put
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The city of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+  /addressbook/{address_key}/country:
+    delete:
+      description: "delete operation for /addressbook/{address_key}/country"
+      operationId: addressbook_address_key_country_delete
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The country of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: "get operation for /addressbook/{address_key}/country"
+      operationId: addressbook_address_key_country_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The country of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: "head operation for /addressbook/{address_key}/country"
+      operationId: addressbook_address_key_country_head
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    put:
+      description: "put operation for /addressbook/{address_key}/country"
+      operationId: addressbook_address_key_country_put
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The country of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+  /addressbook/{address_key}/person_uuid:
+    delete:
+      description: "delete operation for /addressbook/{address_key}/person_uuid"
+      operationId: addressbook_address_key_person_uuid_delete
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: "reference to the person's UUID, for this address"
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: "get operation for /addressbook/{address_key}/person_uuid"
+      operationId: addressbook_address_key_person_uuid_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: "reference to the person's UUID, for this address"
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: "head operation for /addressbook/{address_key}/person_uuid"
+      operationId: addressbook_address_key_person_uuid_head
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    put:
+      description: "put operation for /addressbook/{address_key}/person_uuid"
+      operationId: addressbook_address_key_person_uuid_put
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: "reference to the person's UUID, for this address"
+                type: string
+          description: OK
+      tags:
+      - addressbook
+  /addressbook/{address_key}/state:
+    delete:
+      description: "delete operation for /addressbook/{address_key}/state"
+      operationId: addressbook_address_key_state_delete
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The state of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: "get operation for /addressbook/{address_key}/state"
+      operationId: addressbook_address_key_state_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The state of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: "head operation for /addressbook/{address_key}/state"
+      operationId: addressbook_address_key_state_head
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    put:
+      description: "put operation for /addressbook/{address_key}/state"
+      operationId: addressbook_address_key_state_put
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The state of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+  /addressbook/{address_key}/street:
+    delete:
+      description: "delete operation for /addressbook/{address_key}/street"
+      operationId: addressbook_address_key_street_delete
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The street and civic number of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    get:
+      description: "get operation for /addressbook/{address_key}/street"
+      operationId: addressbook_address_key_street_get
+      parameters:
+      - explode: true
+        in: query
+        name: city
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The street and civic number of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+    head:
+      description: "head operation for /addressbook/{address_key}/street"
+      operationId: addressbook_address_key_street_head
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          description: Default HEAD response
+      tags:
+      - addressbook
+    put:
+      description: "put operation for /addressbook/{address_key}/street"
+      operationId: addressbook_address_key_street_put
+      parameters:
+      - explode: false
+        in: path
+        name: address_key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: The street and civic number of this address
+                type: string
+          description: OK
+      tags:
+      - addressbook
+components:
+  schemas:
+    addressbook:
+      example:
+        country: country
+        city: city
+        street: street
+        person_uuid: person_uuid
+        addrtype: work
+        state: state
+      properties:
+        addrtype:
+          description: "The address type, e.g. work or home"
+          enum:
+          - work
+          - home
+          type: string
+        city:
+          description: The city of this address
+          type: string
+        country:
+          description: The country of this address
+          type: string
+        person_uuid:
+          description: "reference to the person's UUID, for this address"
+          type: string
+        state:
+          description: The state of this address
+          type: string
+        street:
+          description: The street and civic number of this address
+          type: string
+      type: object
+    addressbook_post_request:
+      properties:
+        addrtype:
+          description: "The address type, e.g. work or home"
+          enum:
+          - work
+          - home
+          type: string
+        city:
+          description: The city of this address
+          type: string
+        country:
+          description: The country of this address
+          type: string
+        person_uuid:
+          description: "reference to the person's UUID, for this address"
+          type: string
+        state:
+          description: The state of this address
+          type: string
+        street:
+          description: The street and civic number of this address
+          type: string
+      type: object
+
